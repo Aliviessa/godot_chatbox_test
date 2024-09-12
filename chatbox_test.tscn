@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://x1rev43r3f6n"]
+
+[ext_resource type="Script" path="res://chatbox.gd" id="1_h8iit"]
+[ext_resource type="Script" path="res://line_edit.gd" id="2_eold3"]
+
+[node name="Chatbox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h8iit")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(512, 256)
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="MessageVBox" type="VBoxContainer" parent="VBoxContainer/MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(512, 256)
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+script = ExtResource("2_eold3")
+
+[connection signal="new_msg" from="VBoxContainer/LineEdit" to="." method="_on_line_edit_new_msg"]
+[connection signal="text_submitted" from="VBoxContainer/LineEdit" to="VBoxContainer/LineEdit" method="_on_text_submitted"]
